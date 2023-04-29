@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Taxi Cat</string>
+    <string name="high_scores">High Scores</string>
+    <string name="play">Play</string>
+    <string name="my_game_title">Taxi Cat</string>
+    <string name="main_game_logo">Main Game Logo</string>
+    <string name="choose_color_prompt">Choose Color</string>
+    <string name="sound">Sound</string>
+    <string name="left"><![CDATA[<]]></string>
+    <string name="right"><![CDATA[>]]></string>
+    <string name="input_name">name your cat</string>
+    <string name="game_over">Game Over</string>
+    <string name="score">score:</string>
+    <string name="score_value">100000</string>
+    <string name="play_again">Play Again</string>
+    <string name="game_over_text">GAME OVER</string>
+    <string name="main_menu">Main Menu</string>
+    <string name="high_scores_title">High Scores</string>
+    <string name="back">Back</string>
+    <string name="share">share</string>
+    <string name="x">X</string>
+    <string name="menu_decorations">Menu Decorations</string>
+</resources>

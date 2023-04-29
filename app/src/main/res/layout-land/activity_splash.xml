@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    >
+
+    <TextView
+        android:id="@+id/title_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:fontFamily="@font/press_start"
+        android:gravity="center"
+        android:padding="12dp"
+        android:text="@string/my_game_title"
+        android:textColor="@color/taxi_window_blue"
+        android:textSize="44sp"
+        app:layout_constraintEnd_toEndOf="@id/logo_image"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="@id/logo_image"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/taxi0"
+        android:layout_width="53dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="84dp"
+        android:src="@drawable/taxi128"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.175"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/menu_decorations"/>
+
+    <ImageView
+        android:id="@+id/taxi1"
+        android:layout_width="24dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="28dp"
+        android:src="@drawable/taxi128"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/menu_decorations"/>
+
+
+    <ImageView
+        android:id="@+id/taxi2"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="84dp"
+        android:src="@drawable/taxi128"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/menu_decorations"/>
+
+    <ImageView
+        android:id="@+id/taxi3"
+        android:layout_width="24dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="580dp"
+        android:layout_marginTop="48dp"
+        android:src="@drawable/taxi128"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/menu_decorations"/>
+
+    <ImageView
+        android:id="@+id/taxi4"
+        android:layout_width="43dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="624dp"
+        android:layout_marginTop="76dp"
+        android:src="@drawable/taxi128"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/menu_decorations"/>
+
+    <ImageView
+        android:id="@+id/logo_image"
+        android:layout_width="145dp"
+        android:layout_height="141dp"
+        android:layout_marginBottom="88dp"
+        android:contentDescription="@string/main_game_logo"
+        android:src="@drawable/cat_logo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.238" />
+
+    <Spinner
+        android:id="@+id/choose_color_spinner"
+        android:layout_width="164dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="128dp"
+        android:layout_marginBottom="124dp"
+        android:dropDownHorizontalOffset="24dp"
+        android:dropDownVerticalOffset="48dp"
+        android:entries="@array/color_choices"
+        android:prompt="@string/choose_color_prompt"
+        android:spinnerMode="dropdown"
+        android:textColor="@color/cat_orange"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.535" />
+
+    <Button
+        android:id="@+id/play_button"
+        android:layout_width="256dp"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="@string/play"
+        android:textColor="@color/cat_eye_green"
+        android:textSize="28sp"
+        android:fontFamily="@font/press_start"
+        app:layout_constraintBottom_toTopOf="@id/high_scores_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/high_scores_button"
+        android:layout_width="222dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:padding="16dp"
+        android:text="@string/high_scores"
+        android:textColor="@color/taxi_window_blue"
+        android:textSize="12sp"
+        android:fontFamily="@font/press_start"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <CheckBox
+        android:id="@+id/sound_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:text="@string/sound"
+        android:textColor="@color/taxi_window_blue"
+        android:checked="false"
+        android:fontFamily="@font/press_start"
+        android:buttonTint="@color/taxi_window_blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/name_text_edit"
+        android:layout_width="256dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="24dp"
+        android:textSize="12sp"
+        android:fontFamily="@font/press_start"
+        android:layout_marginRight="72dp"
+        android:layout_marginLeft="72dp"
+        app:layout_constraintBottom_toTopOf="@id/play_button"
+        android:gravity="center"
+        android:hint="@string/input_name"
+        android:cursorVisible="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textColorHint="@color/taxi_window_blue"
+        android:textColor="@color/taxi_window_blue"
+        android:inputType="text"
+        android:autofillHints="name" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
