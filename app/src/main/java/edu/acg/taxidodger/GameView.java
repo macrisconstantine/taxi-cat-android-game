@@ -46,7 +46,7 @@ public class GameView extends View {
     Rect rectBackground;
     Context context;
     Handler handler;
-    final long UPDATE_MILLIS = 30;
+    final long UPDATE_MILLIS = 20;
     Runnable runnable;
     Paint textPaint = new Paint();
     Paint healthPaint = new Paint();
@@ -60,6 +60,8 @@ public class GameView extends View {
     float oldCatX;
     ArrayList<Taxi> taxis;
     ArrayList<Explosion> explosions;
+    long lastUpdateTime;
+    boolean changeFrame = true;
 
     public static MediaPlayer currentlyPlayingSong;
 
@@ -116,12 +118,20 @@ public class GameView extends View {
         }
     }
 
-
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
+        long currentTime = System.currentTimeMillis();
+        float deltaTime = (currentTime - lastUpdateTime) / 1000.0f; // Convert delta time to seconds
+        lastUpdateTime = currentTime;
+
         // Increment the cat's animation frame and loop back to 0 after reaching 7
-        cat.catFrame++;
+        if (changeFrame) {
+            cat.catFrame++;
+            changeFrame = false;
+        } else {
+            changeFrame = true;
+        }
         if (cat.catFrame > 7) {
             cat.catFrame = 0;
         }
@@ -137,7 +147,7 @@ public class GameView extends View {
             taxis.get(i).taxiY += taxis.get(i).taxiVelocity;
             if (taxis.get(i).taxiY >= dHeight) {
                 points += 10;
-                if (points % 100 == 0) {
+                if (points % 50 == 0) {
                     // Increase the speed of all taxis if the player has reached a multiple of 100 points
                     for (int x = 0; x < taxis.size(); x++) {
                         taxis.get(x).increaseSpeed();
@@ -181,7 +191,10 @@ public class GameView extends View {
         for (int i = 0; i < explosions.size(); i++) {
             canvas.drawBitmap(explosions.get(i).getExplosion(explosions.get(i).explosionFrame),
                     explosions.get(i).explosionX, explosions.get(i).explosionY, null);
-            explosions.get(i).explosionFrame++;
+            if (changeFrame) {
+                explosions.get(i).explosionFrame++;
+            }
+
             if (explosions.get(i).explosionFrame > 2) {
                 explosions.remove(i);
             }
@@ -195,7 +208,9 @@ public class GameView extends View {
         }
         canvas.drawRect(dWidth - 300, 30, dWidth - 300 + 90 * life, 80, healthPaint);
         canvas.drawText("" + points, 25, TEXT_SIZE + 25, textPaint);
-        handler.postDelayed(runnable, UPDATE_MILLIS);
+        // Schedule the next frame with adjusted delay time
+        long adjustedDelay = (long) (UPDATE_MILLIS - deltaTime * 1000.0f); // Convert delay time to milliseconds
+        handler.postDelayed(runnable, adjustedDelay);
     }
 
     // Plays music if the sound is on
