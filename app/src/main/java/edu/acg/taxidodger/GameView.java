@@ -2,7 +2,6 @@ package edu.acg.taxidodger;
 
 import static android.content.Context.VIBRATOR_SERVICE;
 
-
 import android.annotation.SuppressLint;
 
 import android.app.Activity;
@@ -25,10 +24,15 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.os.Vibrator;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Random;
 
 /*
@@ -40,7 +44,6 @@ import java.util.Random;
 
 // Define a class named GameView that extends the View class
 public class GameView extends View {
-
     Cat cat = new Cat(getContext(), SplashActivity.catColor);
     Bitmap catFrame;
     Rect rectBackground;
@@ -56,12 +59,15 @@ public class GameView extends View {
     static int dWidth, dHeight;
     Random random;
     float catX, catY;
-    float oldX;
-    float oldCatX;
+    float oldX, oldY;
+    float oldCatX, oldCatY;
     ArrayList<Taxi> taxis;
     ArrayList<Explosion> explosions;
     long lastUpdateTime;
     boolean changeFrame = true;
+    String formattedDate;
+    int taxiColor;
+    int catWidth, catHeight;
 
     public static MediaPlayer currentlyPlayingSong;
 
@@ -70,7 +76,15 @@ public class GameView extends View {
         super(context);
         this.context = context;
         int currentOrientation = getResources().getConfiguration().orientation;
+        taxiColor = 0;
         Activity activity = (Activity) getContext();
+        Date currentDate = new Date();
+
+        // Define the desired date format
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm", Locale.UK);
+
+        // Format the date
+        formattedDate = dateFormat.format(currentDate);
 
         // Lock in screen orientation based on device orientation for the duration of the game
         if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -87,11 +101,7 @@ public class GameView extends View {
         // Start playing background music
         playMusic();
 
-        // Set the starting cat frame based on selected color
-        if (SplashActivity.catColor == 0)
-            catFrame = BitmapFactory.decodeResource(context.getResources(), R.drawable.cat_stand64);
-        else if (SplashActivity.catColor == 1)
-            catFrame = BitmapFactory.decodeResource(context.getResources(), R.drawable.white_0);
+        catFrame = BitmapFactory.decodeResource(context.getResources(), R.drawable.cat_run4);
 
         // Get display size and create background rectangle
         Display display = ((Activity) getContext()).getWindowManager().getDefaultDisplay();
@@ -108,8 +118,10 @@ public class GameView extends View {
         textPaint.setTypeface(ResourcesCompat.getFont(context, R.font.press_start));
         healthPaint.setColor(ContextCompat.getColor(context, R.color.cat_eye_green));
         random = new Random();
-        catX = (int) (dWidth / 2.0 - catFrame.getWidth() / 2.0);
-        catY = dHeight - catFrame.getHeight() * 2;
+        catWidth = catFrame.getWidth();
+        catHeight = catFrame.getHeight();
+        catX = (int) (dWidth / 2.0 - catWidth / 2.0);
+        catY = dHeight - catWidth*3;
         taxis = new ArrayList<>();
         explosions = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
@@ -118,6 +130,7 @@ public class GameView extends View {
         }
     }
 
+    @SuppressLint("DrawAllocation")
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
@@ -153,6 +166,15 @@ public class GameView extends View {
                         taxis.get(x).increaseSpeed();
                     }
                 }
+                if (points%1000==0) {
+                    life=3;
+                    taxiColor++;
+                    taxis.add(new Taxi(context));
+                    for (int x = 0; x < taxis.size(); x++) {
+                        taxis.get(x).resetSpeed();
+                        taxis.get(x).changeColor(context, taxiColor);
+                    }
+                }
                 taxis.get(i).resetPosition();
             }
         }
@@ -181,6 +203,11 @@ public class GameView extends View {
                     intent.putExtra("points", points);
                     intent.putExtra("color", SplashActivity.catColor);
                     intent.putExtra("name", SplashActivity.userName);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        intent.putExtra("date", String.valueOf(LocalDateTime.now()));
+                    } else {
+                        intent.putExtra("date", String.valueOf(formattedDate));
+                    }
                     context.startActivity(intent);
                     ((Activity) context).finish();
                 }
@@ -201,9 +228,11 @@ public class GameView extends View {
         }
 
         // Update the health bar color based on the player's remaining life count
-        if (life == 2) {
+        if (life == 3) {
+            healthPaint.setColor(ContextCompat.getColor(context, R.color.cat_eye_green));
+        } else if (life == 2) {
             healthPaint.setColor(ContextCompat.getColor(context, R.color.cat_orange));
-        } else if (life == 1) {
+        }else if (life == 1) {
             healthPaint.setColor(Color.RED);
         }
         canvas.drawRect(dWidth - 300, 30, dWidth - 300 + 90 * life, 80, healthPaint);
@@ -242,24 +271,36 @@ public class GameView extends View {
     @SuppressLint("ClickableViewAccessibility")
     public boolean onTouchEvent(MotionEvent event) {
         float touchX = event.getX();
+        float touchY = event.getY();
         int action = event.getAction();
         if (action == MotionEvent.ACTION_DOWN) {
             // Store the old touch X-coordinate and cat X-coordinate
+            oldY = event.getY();
             oldX = event.getX();
+            oldCatY = catY;
             oldCatX = catX;
         }
         if (action == MotionEvent.ACTION_MOVE) {
             // Calculate the shift in the touch X-coordinate
-            float shift = oldX - touchX;
+            float shiftX = oldX - touchX;
+            float shiftY = oldY - touchY;
             // Calculate the new cat X-coordinate based on the shift
-            float newCatX = oldCatX - shift;
+            float newCatX = oldCatX - shiftX;
+            float newCatY = oldCatY - shiftY;
             // Check if the new cat X-coordinate is within the bounds of the screen
             if (newCatX <= 0) {
                 catX = 0;
-            } else if (newCatX >= dWidth - catFrame.getWidth()) {
-                catX = dWidth - catFrame.getWidth();
+            } else if (newCatX >= dWidth - catWidth) {
+                catX = dWidth - catWidth;
             } else {
                 catX = newCatX;
+            }
+            if (newCatY <= 0) {
+                catY = 0;
+            } else if (newCatY >= dHeight - catWidth*3){
+                catY = dHeight - catWidth*3;
+            } else {
+                catY = newCatY;
             }
         }
         // Return true to indicate that the touch event is consumed

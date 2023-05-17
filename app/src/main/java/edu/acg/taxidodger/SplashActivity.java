@@ -60,7 +60,26 @@ public class SplashActivity extends AppCompatActivity {
             colorChoice.setSelection(1);
             logoCat.setImageResource(R.drawable.white_logo_cat);
         }
-
+        else if (catColor == 2) {
+            colorChoice.setSelection(2);
+            logoCat.setImageResource(R.drawable.pink_logo_cat);
+        }
+        else if (catColor == 3) {
+            colorChoice.setSelection(3);
+            logoCat.setImageResource(R.drawable.neon_logo_cat);
+        }
+        else if (catColor == 4) {
+            colorChoice.setSelection(4);
+            logoCat.setImageResource(R.drawable.night_logo_cat);
+        }
+        else if (catColor == 5) {
+            colorChoice.setSelection(5);
+            logoCat.setImageResource(R.drawable.gold_logo_cat);
+        }
+        else if (catColor == 6) {
+            colorChoice.setSelection(6);
+            logoCat.setImageResource(R.drawable.sphynx_logo_cat);
+        }
         // Listen for changes to the sound checkbox
         soundCheck.setOnCheckedChangeListener((buttonView, isChecked) -> {
             // enable/disable audio when the checkbox state changes
@@ -104,6 +123,16 @@ public class SplashActivity extends AppCompatActivity {
                     logoCat.setImageResource(R.drawable.cat_logo);
                 } else if (selectedColor == 1){
                     logoCat.setImageResource(R.drawable.white_logo_cat);
+                } else if (selectedColor == 2){
+                    logoCat.setImageResource(R.drawable.pink_logo_cat);
+                } else if (selectedColor == 3){
+                    logoCat.setImageResource(R.drawable.neon_logo_cat);
+                } else if (selectedColor == 4){
+                    logoCat.setImageResource(R.drawable.night_logo_cat);
+                } else if (selectedColor == 5){
+                    logoCat.setImageResource(R.drawable.gold_logo_cat);
+                } else if (selectedColor == 6){
+                    logoCat.setImageResource(R.drawable.sphynx_logo_cat);
                 }
                 // Save the new cat color in SharedPreferences
                 if (sharedPreferences != null) {
@@ -164,6 +193,14 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        stopMusic();
+        if (soundOn)
+            playMusic();
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         stopMusic();
@@ -172,6 +209,7 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        GameView.stopMusic();
         stopMusic();
     }
 
@@ -203,5 +241,4 @@ public class SplashActivity extends AppCompatActivity {
             currentlyPlayingSong = null;
         }
     }
-
 }

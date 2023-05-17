@@ -14,8 +14,8 @@ public class HighScores {
     }
 
     // Method to add a new score to the list
-    public void addScore(String name, int score) {
-        Score newScore = new Score(name, score);
+    public void addScore(String name, int score, String date) {
+        Score newScore = new Score(name, score, date);
         scores.add(newScore);
         Collections.sort(scores);
     }
@@ -36,11 +36,13 @@ public class HighScores {
     public static class Score implements Comparable<Score> {
         private final String name;
         private final int score;
+        private final String date;
 
         // Constructor to initialize a score entry
-        public Score(String name, int score) {
+        public Score(String name, int score, String date) {
             this.name = name;
             this.score = score;
+            this.date = date;
         }
 
         public String getName() {
@@ -49,6 +51,10 @@ public class HighScores {
 
         public int getScore() {
             return score;
+        }
+
+        public String getDate(){
+            return date;
         }
 
         // Override compareTo method to compare scores in descending order

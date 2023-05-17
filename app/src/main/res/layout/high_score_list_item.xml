@@ -8,11 +8,23 @@
 
     <TextView
         android:id="@+id/high_score_rank"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/name_score_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:fontFamily="@font/press_start"
+        android:layout_marginStart="24dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:layout_weight="1"
+        />
 
     <TextView
         android:id="@+id/high_score_score"

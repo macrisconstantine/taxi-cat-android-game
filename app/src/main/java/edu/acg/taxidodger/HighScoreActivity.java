@@ -48,6 +48,8 @@ public class HighScoreActivity extends AppCompatActivity {
             Intent intent = new Intent(HighScoreActivity.this, HighScoreDetailActivity.class);
             intent.putExtra("name", highScore.getName());
             intent.putExtra("score", highScore.getScore());
+            if (highScore.getDate()!=null)
+                intent.putExtra("date", highScore.getDate());
             startActivity(intent);
         });
 

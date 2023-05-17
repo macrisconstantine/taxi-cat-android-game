@@ -46,11 +46,13 @@ public class HighScoresAdapter extends BaseAdapter {
         // Calculate the rank of the score
         int rank = position + 1;
         TextView rankTextView = convertView.findViewById(R.id.high_score_rank);
+        TextView scoreNameView = convertView.findViewById(R.id.name_score_text_view);
         TextView scoreTextView = convertView.findViewById(R.id.high_score_score);
 
         // Get the score at the given position
         HighScores.Score score = scores.get(position);
-        // Set the rank and score text views
+        // Set the rank, name, and score text views
+        scoreNameView.setText(score.getName());
         rankTextView.setText(String.valueOf(rank));
         scoreTextView.setText(String.valueOf(score.getScore()));
 

@@ -33,6 +33,56 @@ public class Cat {
             cat[6] = BitmapFactory.decodeResource(context.getResources(), R.drawable.white_cat_run6);
             cat[7] = BitmapFactory.decodeResource(context.getResources(), R.drawable.white_cat_run7);
         }
+        else if (color == 2) {
+            cat[0] = BitmapFactory.decodeResource(context.getResources(), R.drawable.pink_cat_run0);
+            cat[1] = BitmapFactory.decodeResource(context.getResources(), R.drawable.pink_cat_run1);
+            cat[2] = BitmapFactory.decodeResource(context.getResources(), R.drawable.pink_cat_run2);
+            cat[3] = BitmapFactory.decodeResource(context.getResources(), R.drawable.pink_cat_run3);
+            cat[4] = BitmapFactory.decodeResource(context.getResources(), R.drawable.pink_cat_run4);
+            cat[5] = BitmapFactory.decodeResource(context.getResources(), R.drawable.pink_cat_run5);
+            cat[6] = BitmapFactory.decodeResource(context.getResources(), R.drawable.pink_cat_run6);
+            cat[7] = BitmapFactory.decodeResource(context.getResources(), R.drawable.pink_cat_run7);
+        }
+        else if (color == 3) {
+            cat[0] = BitmapFactory.decodeResource(context.getResources(), R.drawable.neon_cat_run0);
+            cat[1] = BitmapFactory.decodeResource(context.getResources(), R.drawable.neon_cat_run1);
+            cat[2] = BitmapFactory.decodeResource(context.getResources(), R.drawable.neon_cat_run2);
+            cat[3] = BitmapFactory.decodeResource(context.getResources(), R.drawable.neon_cat_run3);
+            cat[4] = BitmapFactory.decodeResource(context.getResources(), R.drawable.neon_cat_run4);
+            cat[5] = BitmapFactory.decodeResource(context.getResources(), R.drawable.neon_cat_run5);
+            cat[6] = BitmapFactory.decodeResource(context.getResources(), R.drawable.neon_cat_run6);
+            cat[7] = BitmapFactory.decodeResource(context.getResources(), R.drawable.neon_cat_run7);
+        }
+        else if (color == 4) {
+            cat[0] = BitmapFactory.decodeResource(context.getResources(), R.drawable.night_cat_run0);
+            cat[1] = BitmapFactory.decodeResource(context.getResources(), R.drawable.night_cat_run1);
+            cat[2] = BitmapFactory.decodeResource(context.getResources(), R.drawable.night_cat_run2);
+            cat[3] = BitmapFactory.decodeResource(context.getResources(), R.drawable.night_cat_run3);
+            cat[4] = BitmapFactory.decodeResource(context.getResources(), R.drawable.night_cat_run4);
+            cat[5] = BitmapFactory.decodeResource(context.getResources(), R.drawable.night_cat_run5);
+            cat[6] = BitmapFactory.decodeResource(context.getResources(), R.drawable.night_cat_run6);
+            cat[7] = BitmapFactory.decodeResource(context.getResources(), R.drawable.night_cat_run7);
+        }
+        else if (color == 5) {
+            cat[0] = BitmapFactory.decodeResource(context.getResources(), R.drawable.gold_cat_run0);
+            cat[1] = BitmapFactory.decodeResource(context.getResources(), R.drawable.gold_cat_run1);
+            cat[2] = BitmapFactory.decodeResource(context.getResources(), R.drawable.gold_cat_run2);
+            cat[3] = BitmapFactory.decodeResource(context.getResources(), R.drawable.gold_cat_run3);
+            cat[4] = BitmapFactory.decodeResource(context.getResources(), R.drawable.gold_cat_run4);
+            cat[5] = BitmapFactory.decodeResource(context.getResources(), R.drawable.gold_cat_run5);
+            cat[6] = BitmapFactory.decodeResource(context.getResources(), R.drawable.gold_cat_run6);
+            cat[7] = BitmapFactory.decodeResource(context.getResources(), R.drawable.gold_cat_run7);
+        }
+        else if (color == 6) {
+            cat[0] = BitmapFactory.decodeResource(context.getResources(), R.drawable.sphynx_cat_run0);
+            cat[1] = BitmapFactory.decodeResource(context.getResources(), R.drawable.sphynx_cat_run1);
+            cat[2] = BitmapFactory.decodeResource(context.getResources(), R.drawable.sphynx_cat_run2);
+            cat[3] = BitmapFactory.decodeResource(context.getResources(), R.drawable.sphynx_cat_run3);
+            cat[4] = BitmapFactory.decodeResource(context.getResources(), R.drawable.sphynx_cat_run4);
+            cat[5] = BitmapFactory.decodeResource(context.getResources(), R.drawable.sphynx_cat_run5);
+            cat[6] = BitmapFactory.decodeResource(context.getResources(), R.drawable.sphynx_cat_run6);
+            cat[7] = BitmapFactory.decodeResource(context.getResources(), R.drawable.sphynx_cat_run7);
+        }
     }
 
     public Bitmap getCat(int catFrame) {

@@ -22,13 +22,16 @@ public class HighScoreDetailActivity extends AppCompatActivity {
         Button back = findViewById(R.id.back_detail_button);
         TextView nameTextView = findViewById(R.id.name_score_text_view);
         TextView scoreTextView = findViewById(R.id.score_detail_view);
+        TextView scoreDateView = findViewById(R.id.score_date_view);
 
         Intent intent = getIntent();
         String name = intent.getStringExtra("name");
         int score = intent.getIntExtra("score", 0);
+        String date = intent.getStringExtra("date");
 
         nameTextView.setText(name);
         scoreTextView.setText(String.valueOf(score));
+        scoreDateView.setText(date);
 
         // Handle click events on the back button
         back.setOnClickListener(v -> finish());

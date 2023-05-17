@@ -13,6 +13,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 
+
 // This activity class describes the functionality of the GameOver activity
 
 public class GameOverActivity extends AppCompatActivity {
@@ -32,6 +33,7 @@ public class GameOverActivity extends AppCompatActivity {
         // Retrieve the score from the Intent
         int score = getIntent().getIntExtra("points",0);
         String userName = getIntent().getStringExtra("name");
+        String date = getIntent().getStringExtra("date");
         // Find the TextView for displaying the score
         TextView scoreTextView = findViewById(R.id.score_text1);
         // Set the text of the TextView to the score
@@ -50,7 +52,7 @@ public class GameOverActivity extends AppCompatActivity {
 
         // Adds the new score of the most recent session (if given a username)
         if (userName != null) {
-            scores.addScore(userName, score);
+            scores.addScore(userName, score, date);
         }
 
         // Removes any score listings that are below the top 20 highest entries
