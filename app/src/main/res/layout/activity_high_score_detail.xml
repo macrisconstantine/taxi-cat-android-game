@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--This layout is inflated for details when a high score list element is selected-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/name_score_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:fontFamily="@font/press_start"
+        android:padding="12dp"
+        android:layout_margin="32dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true" />
+
+    <TextView
+        android:id="@+id/score_detail_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="64sp"
+        android:fontFamily="@font/press_start"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_below="@id/name_score_text_view"
+        android:layout_margin="64dp"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/score_date_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:fontFamily="@font/press_start"
+        android:layout_below="@id/score_detail_view"
+        android:layout_margin="32dp"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/back_detail_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/back"
+        android:fontFamily="@font/press_start"
+        android:layout_margin="16dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        />
+
+</RelativeLayout>

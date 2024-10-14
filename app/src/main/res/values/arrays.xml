@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="color_choices">
+        <item>orange</item>
+        <item>white</item>
+        <item>pink</item>
+        <item>neon</item>
+        <item>night</item>
+        <item>gold</item>
+        <item>sphynx</item>
+    </string-array>
+</resources>

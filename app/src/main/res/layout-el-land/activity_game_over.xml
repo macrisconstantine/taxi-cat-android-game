@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/game_over_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/score_text1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:fontFamily="@font/press_start"
+        android:gravity="center"
+        android:text="@string/score_value"
+        android:textColor="@color/taxi_window_blue"
+        android:textSize="42sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.535" />
+
+    <TextView
+        android:id="@+id/score_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/press_start"
+        android:gravity="center"
+        android:paddingBottom="12dp"
+        android:text="@string/score"
+        android:textColor="@color/taxi_window_blue"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/score_text1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/game_over_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:fontFamily="@font/press_start"
+        android:gravity="center"
+        android:text="@string/game_over_text"
+        android:textColor="@color/cat_orange"
+        android:textSize="56sp"
+        app:layout_constraintBottom_toTopOf="@id/score_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias=".75" />
+
+    <Button
+        android:id="@+id/play_again_button"
+        android:layout_width="256dp"
+        android:layout_height="84dp"
+        android:fontFamily="@font/press_start"
+        android:padding="16dp"
+        android:text="@string/play_again"
+        android:textColor="@color/taxi_window_blue"
+        android:textSize="20sp"
+        android:layout_margin="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/menu_button"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <Button
+        android:id="@+id/menu_button"
+        android:layout_width="256dp"
+        android:layout_height="84dp"
+        android:fontFamily="@font/press_start"
+        android:padding="16dp"
+        android:text="@string/main_menu"
+        android:textSize="22sp"
+        android:layout_margin="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/play_again_button"
+        app:layout_constraintStart_toStartOf="parent"
+         />
+    <Button
+        android:id="@+id/share_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:padding="8dp"
+        android:text="@string/share"
+        android:textSize="12sp"
+        android:fontFamily="@font/press_start"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+         />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

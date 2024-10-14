@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="color_choices">
+        <item>πορτοκαλί</item>
+        <item>λευκό</item>
+        <item>ροζ</item>
+        <item>νέο</item>
+        <item>νύχτα</item>
+        <item>χρυσός</item>
+        <item>σφιγγα</item>
+    </string-array>
+</resources>

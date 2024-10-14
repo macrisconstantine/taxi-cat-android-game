@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Γάτα Ταξί</string>
+    <string name="high_scores">Υψηλά Σκορ</string>
+    <string name="play">Παίζω</string>
+    <string name="my_game_title">Γάτα Ταξί</string>
+    <string name="main_game_logo">Λογότυπο κύριου παιχνιδιού</string>
+    <string name="choose_color_prompt">Επιλογή Χρώματος</string>
+    <string name="sound">Ήχος</string>
+    <string name="left"><![CDATA[<]]></string>
+    <string name="right"><![CDATA[>]]></string>
+    <string name="input_name">ονομάστε τη γάτα σου</string>
+    <string name="game_over">ΤΈΛΟΣ ΠΑΙΧΝΙΔΙΟΎ</string>
+    <string name="score">σκορ:</string>
+    <string name="score_value">100000</string>
+    <string name="play_again">Ξαναπαίζω</string>
+    <string name="game_over_text">ΤΈΛΟΣ ΠΑΙΧΝΙΔΙΟΎ</string>
+    <string name="main_menu">Κυρίως Mενού</string>
+    <string name="high_scores_title">Υψηλά Σκορ</string>
+    <string name="back">Πίσω</string>
+    <string name="share">Κοινοποίηση</string>
+    <string name="x">X</string>
+</resources>
