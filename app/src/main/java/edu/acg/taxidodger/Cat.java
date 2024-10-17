@@ -1,4 +1,5 @@
 package edu.acg.taxidodger;
+// Note to test android studio github connection
 
 import android.content.Context;
 import android.graphics.Bitmap;
