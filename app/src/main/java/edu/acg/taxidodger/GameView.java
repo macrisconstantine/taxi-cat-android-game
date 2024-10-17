@@ -16,7 +16,9 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.media.AudioAttributes;
 import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.os.Build;
 import android.os.Handler;
 import android.view.Display;
@@ -68,6 +70,8 @@ public class GameView extends View {
     String formattedDate;
     int taxiColor;
     int catWidth, catHeight;
+    private SoundPool soundPool;
+    private final int explosionSoundId;
 
     public static MediaPlayer currentlyPlayingSong;
 
@@ -79,6 +83,19 @@ public class GameView extends View {
         taxiColor = 0;
         Activity activity = (Activity) getContext();
         Date currentDate = new Date();
+        // Initialize SoundPool
+        AudioAttributes audioAttributes = new AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_GAME)
+                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                .build();
+
+        soundPool = new SoundPool.Builder()
+                .setMaxStreams(3) // Adjust based on how many sounds you need to play at the same time
+                .setAudioAttributes(audioAttributes)
+                .build();
+
+        // Load the explosion sound into the SoundPool
+        explosionSoundId = soundPool.load(context, R.raw.explosion_sound, 1);
 
         // Define the desired date format
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm", Locale.UK);
@@ -127,6 +144,14 @@ public class GameView extends View {
         for (int i = 0; i < 3; i++) {
             Taxi taxi = new Taxi(context);
             taxis.add(taxi);
+        }
+    }
+
+
+    // Method to play the explosion sound
+    private void playExplosionSound() {
+        if (soundPool != null) {
+            soundPool.play(explosionSoundId, 1.0f, 1.0f, 1, 0, 1.0f); // Adjust volume, priority, loop, and rate as needed
         }
     }
 
@@ -190,6 +215,7 @@ public class GameView extends View {
                 damageEffect();
                 // Create an explosion at the taxi's position and reset the taxi's position
                 Explosion explosion = new Explosion(context);
+                playExplosionSound();
                 explosion.explosionX = taxis.get(i).taxiX - 50;
                 explosion.explosionY = taxis.get(i).taxiY;
                 explosions.add(explosion);
@@ -264,6 +290,14 @@ public class GameView extends View {
             currentlyPlayingSong.release();
             // Set the MediaPlayer object to null
             currentlyPlayingSong = null;
+        }
+    }
+
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        if (soundPool != null) {
+            soundPool.release();
+            soundPool = null;
         }
     }
 
