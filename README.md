@@ -1,5 +1,4 @@
 # taxi-cat-android-game
-## About
 - This game was the result of the final project for my course Mobile Application Development.
 - The game was made using Android Studio, and uses XML, Java, and a YouTube game tutorial for inspiration and a functional foundation.
 ## Gameplay
