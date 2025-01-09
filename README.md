@@ -7,4 +7,5 @@
 - Hone your taxi-dodging skills and make each life count as you climb the ranks of the high score leaderboard!
 ## How to Download
 - The game was just released to the Google Play Store.
+- Visit the website link on the right to see it in the store.
 - If you'd like to try it now, the APK can be downloaded for Android from the releases section of this repo.
