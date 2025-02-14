@@ -1,3 +1,5 @@
+![image](https://github.com/user-attachments/assets/98ed1136-a72a-4d5d-9d85-0894acbb5187)
+
 # taxi-cat-android-game
 - This game was the result of the final project for my course Mobile Application Development.
 - The game was made using Android Studio, and uses XML, Java, and a YouTube game tutorial for inspiration and a functional foundation.
