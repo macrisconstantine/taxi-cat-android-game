@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/08a78f62-c388-4c47-8e93-52f44c1dd3b1)
+[![image](https://github.com/user-attachments/assets/08a78f62-c388-4c47-8e93-52f44c1dd3b1)](https://play.google.com/store/apps/details?id=edu.acg.taxidodger)
 
 # taxi-cat-android-game
 - This game was the result of the final project for my course Mobile Application Development.
