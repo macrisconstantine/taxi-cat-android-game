@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/98ed1136-a72a-4d5d-9d85-0894acbb5187)
+![image](https://github.com/user-attachments/assets/08a78f62-c388-4c47-8e93-52f44c1dd3b1)
 
 # taxi-cat-android-game
 - This game was the result of the final project for my course Mobile Application Development.
