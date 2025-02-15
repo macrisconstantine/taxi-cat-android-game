@@ -3,6 +3,7 @@
 # taxi-cat-android-game
 - This game was the result of the final project for my course Mobile Application Development.
 - The game was made using Android Studio, and uses XML, Java, and a YouTube game tutorial for inspiration and a functional foundation.
+- Click the image at the top to visit the Play Store Listing
 ## Gameplay
 - Take control of a cat as you dash and weave your way through waves of oncoming taxi cabs!
 - Customize your cat’s name and appearance before you dive into the the adventure of surviving oncoming traffic.
