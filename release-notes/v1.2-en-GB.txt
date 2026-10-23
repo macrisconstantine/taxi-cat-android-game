@@ -1,0 +1,8 @@
+The biggest Taxi Cat update yet.
+
+NEW - Near-miss combos: skim past a taxi to build a multiplier and bonus points.
+NEW - Power-ups: grab a shield, slow down time, double your score or win back a life.
+NEW - Six city districts, each with its own look, unlocked as your score climbs.
+NEW - Smarter traffic: taxis that swerve and speed up the further you get.
+
+Plus a proper city street to run through, crash and pickup effects, a pause button, a new HUD, and smoother movement on every device.
