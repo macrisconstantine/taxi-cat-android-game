@@ -71,7 +71,8 @@ public class GameOverActivity extends AppCompatActivity {
         shareButton.setOnClickListener(v -> {
 
             // Shares some text with the high score
-            String textToShare = "I just got a score of " + score + " in Taxi Cat!\n\n" +
+            String comboLine = bestCombo > 1 ? " with a best combo of x" + bestCombo : "";
+            String textToShare = "I just got a score of " + score + comboLine + " in Taxi Cat!\n\n" +
                     "Think you can beat that?\n\n\n\nbtw Constantine Macris made Taxi Cat...his GitHub is " +
                     "https://github.com/macrisconstantine";
             Intent shareIntent = new Intent(Intent.ACTION_SEND);

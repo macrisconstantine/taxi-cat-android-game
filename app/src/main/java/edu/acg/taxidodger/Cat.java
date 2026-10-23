@@ -1,5 +1,4 @@
 package edu.acg.taxidodger;
-// Note to test android studio github connection
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -24,7 +23,7 @@ public class Cat {
             cat[6] = BitmapFactory.decodeResource(context.getResources(), R.drawable.cat_run6);
             cat[7] = BitmapFactory.decodeResource(context.getResources(), R.drawable.cat_run7);
         }
-        else if (color == 1) {
+       else if (color == 1) {
             cat[0] = BitmapFactory.decodeResource(context.getResources(), R.drawable.white_cat_run0);
             cat[1] = BitmapFactory.decodeResource(context.getResources(), R.drawable.white_cat_run1);
             cat[2] = BitmapFactory.decodeResource(context.getResources(), R.drawable.white_cat_run2);
