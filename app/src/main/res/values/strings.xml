@@ -19,5 +19,5 @@
     <string name="back">Back</string>
     <string name="share">share</string>
     <string name="x">X</string>
-    <string name="menu_decorations" translatable="false">Menu Decorations</string>
+    <string name="menu_decorations">Menu Decorations</string>
 </resources>

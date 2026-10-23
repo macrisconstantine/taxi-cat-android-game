@@ -24,7 +24,6 @@ public class SplashActivity extends AppCompatActivity {
     public static int catColor = 0;
     public static String userName = "Player";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

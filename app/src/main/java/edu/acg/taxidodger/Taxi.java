@@ -4,68 +4,122 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
-public class Taxi{
-    Bitmap taxi;
-    int taxiX, taxiY, taxiVelocity;
-    int speedIncrease = 0;
-    Random random;
+public class Taxi {
 
-    // Constructor for the Taxi class that loads the taxi image and initializes random number generator
-    public Taxi(Context context){
-        taxi = BitmapFactory.decodeResource(context.getResources(), R.drawable.taxi128);
-        random = new Random();
+    /** Drives straight down. */
+    public static final int NORMAL = 0;
+    /** Drifts side to side as it falls. Shows up from district 3. */
+    public static final int SWERVER = 1;
+    /** Narrower window to react to. Shows up from district 2. */
+    public static final int SPEEDER = 2;
+
+    private static final int[] COLOR_RES = {
+            R.drawable.taxi128,
+            R.drawable.orange_taxi,
+            R.drawable.red_taxi,
+            R.drawable.purple_taxi,
+            R.drawable.blue_taxi,
+            R.drawable.green_taxi,
+            R.drawable.ghost_taxi,
+            R.drawable.teal_taxi,
+            R.drawable.blorange_taxi,
+            R.drawable.black_taxi,
+            R.drawable.pink_taxi,
+            R.drawable.gold_taxi,
+            R.drawable.gurple_taxi,
+    };
+
+    // Re-decoding the same PNG for every taxi on every level change was pure churn.
+    private static final Map<Integer, Bitmap> BITMAP_CACHE = new HashMap<>();
+
+    Bitmap taxi;
+    float taxiX, taxiY;
+    /** Pixels per second, so the game plays the same on any refresh rate. */
+    float speed;
+    int type = NORMAL;
+    /** Set once the taxi has drawn level with the cat, so a near miss scores once. */
+    boolean passedCat;
+
+    private float swerveAmp, swervePhase, swerveFreq, homeX;
+    private final Random random = new Random();
+
+    public Taxi(Context context) {
+        taxi = cached(context, R.drawable.taxi128);
         resetPosition();
     }
 
-    // Sets the position and velocity of the taxi to a random value
+    static Bitmap cached(Context context, int resId) {
+        Bitmap bitmap = BITMAP_CACHE.get(resId);
+        if (bitmap == null || bitmap.isRecycled()) {
+            bitmap = BitmapFactory.decodeResource(context.getResources(), resId);
+            BITMAP_CACHE.put(resId, bitmap);
+        }
+        return bitmap;
+    }
+
+    /** Drops the taxi back above the top of the screen with fresh random values. */
     public void resetPosition() {
-        taxiX = random.nextInt(GameView.dWidth - getTaxiWidth());
-        taxiY = -200 + random.nextInt(600) * -1;
-        taxiVelocity = 15 + random.nextInt(16) + speedIncrease;
+        int w = Math.max(1, GameView.dWidth);
+        int h = Math.max(1, GameView.dHeight);
+
+        taxiX = random.nextFloat() * Math.max(1, w - getTaxiWidth());
+        taxiY = -getTaxiHeight() - random.nextFloat() * h * 0.9f;
+        speed = h * (0.42f + random.nextFloat() * 0.30f);
+
+        homeX = taxiX;
+        swervePhase = random.nextFloat() * 6.2831855f;
+        swerveFreq = 1.2f + random.nextFloat() * 1.0f;
+        swerveAmp = w * (0.07f + random.nextFloat() * 0.10f);
+        type = NORMAL;
+        passedCat = false;
     }
 
-    // Increases the speed of the taxi by a fixed amount
-    public void increaseSpeed() {
-        speedIncrease += 1;
-    }
-    public void resetSpeed(){
-        speedIncrease = 0;
-    }
-
-    public void changeColor(Context context, int color) {
-        if (color==0){
-            taxi = BitmapFactory.decodeResource(context.getResources(), R.drawable.taxi128);
-        } else if (color==1){
-            taxi = BitmapFactory.decodeResource(context.getResources(), R.drawable.orange_taxi);
-        } else if (color==2){
-            taxi = BitmapFactory.decodeResource(context.getResources(), R.drawable.red_taxi);
-        } else if (color==3){
-            taxi = BitmapFactory.decodeResource(context.getResources(), R.drawable.purple_taxi);
-        } else if (color==4){
-            taxi = BitmapFactory.decodeResource(context.getResources(), R.drawable.blue_taxi);
-        } else if (color==5){
-            taxi = BitmapFactory.decodeResource(context.getResources(), R.drawable.green_taxi);
-        } else if (color==6){
-            taxi = BitmapFactory.decodeResource(context.getResources(), R.drawable.ghost_taxi);
-        } else if (color==7){
-            taxi = BitmapFactory.decodeResource(context.getResources(), R.drawable.teal_taxi);
-        } else if (color==8){
-            taxi = BitmapFactory.decodeResource(context.getResources(), R.drawable.blorange_taxi);
-        } else if (color==9){
-            taxi = BitmapFactory.decodeResource(context.getResources(), R.drawable.black_taxi);
-        } else if (color==10) {
-            taxi = BitmapFactory.decodeResource(context.getResources(), R.drawable.pink_taxi);
-        } else if (color==11){
-            taxi = BitmapFactory.decodeResource(context.getResources(), R.drawable.gold_taxi);
+    /** Picks a behaviour appropriate to how far the player has got. */
+    public void assignType(int district) {
+        float roll = random.nextFloat();
+        if (district >= 2 && roll < 0.22f) {
+            type = SWERVER;
+        } else if (district >= 1 && roll < 0.40f) {
+            type = SPEEDER;
+            speed *= 1.40f;
         } else {
-            taxi = BitmapFactory.decodeResource(context.getResources(), R.drawable.gurple_taxi);
+            type = NORMAL;
+        }
+        homeX = taxiX;
+    }
+
+    public void update(float dt, float speedMultiplier) {
+        taxiY += speed * speedMultiplier * dt;
+        if (type == SWERVER) {
+            swervePhase += swerveFreq * dt;
+            float x = homeX + swerveAmp * (float) Math.sin(swervePhase);
+            float max = GameView.dWidth - getTaxiWidth();
+            taxiX = Math.max(0f, Math.min(max, x));
         }
     }
 
-    // Returns the width of the taxi image
-    public int getTaxiWidth(){
+    public void changeColor(Context context, int color) {
+        int index = ((color % COLOR_RES.length) + COLOR_RES.length) % COLOR_RES.length;
+        taxi = cached(context, COLOR_RES[index]);
+    }
+
+    public int getTaxiWidth() {
         return taxi.getWidth();
+    }
+
+    public int getTaxiHeight() {
+        return taxi.getHeight();
+    }
+
+    public float centerX() {
+        return taxiX + getTaxiWidth() / 2f;
+    }
+
+    public float centerY() {
+        return taxiY + getTaxiHeight() / 2f;
     }
 }
