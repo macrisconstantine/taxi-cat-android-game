@@ -32,6 +32,7 @@ public class GameOverActivity extends AppCompatActivity {
 
         // Retrieve the score from the Intent
         int score = getIntent().getIntExtra("points",0);
+        int bestCombo = getIntent().getIntExtra("combo",0);
         String userName = getIntent().getStringExtra("name");
         String date = getIntent().getStringExtra("date");
         // Find the TextView for displaying the score

@@ -2,21 +2,51 @@ plugins {
     id 'com.android.application'
 }
 
+// Release signing credentials live in keystore.properties, which is never committed.
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+if (keystorePropertiesFile.exists()) {
+    keystorePropertiesFile.withInputStream { keystoreProperties.load(it) }
+}
+
+// All four must be present and non-blank before release signing is wired up.
+def signingKeys = ["storeFile", "storePassword", "keyAlias", "keyPassword"]
+def filledKeys = signingKeys.findAll { keystoreProperties[it]?.trim() }
+def hasSigningConfig = filledKeys.size() == signingKeys.size()
+if (!filledKeys.isEmpty() && !hasSigningConfig) {
+    throw new GradleException(
+            "keystore.properties is incomplete - missing or blank: " +
+            (signingKeys - filledKeys).join(", "))
+}
+
 android {
     namespace 'edu.acg.taxidodger'
     // Compile with the latest to see new warnings/features
-    compileSdk 35
+    compileSdk 36
 
     defaultConfig {
         applicationId "edu.acg.taxidodger"
         minSdk 24
-        // Targeting 35 or 36 as requested by the Play Store
-        targetSdk 35
+        // Play requires 36 for any update submitted after 2026-08-31
+        targetSdk 36
 
-        versionCode 2
-        versionName "1.1"
+        versionCode 3
+        versionName "1.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        release {
+            // Left unconfigured when keystore.properties is absent, so the
+            // project still syncs and debug builds still work.
+            if (hasSigningConfig) {
+                storeFile file(keystoreProperties["storeFile"])
+                storePassword keystoreProperties["storePassword"]
+                keyAlias keystoreProperties["keyAlias"]
+                keyPassword keystoreProperties["keyPassword"]
+            }
+        }
     }
 
     buildTypes {
@@ -24,6 +54,7 @@ android {
             shrinkResources true
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig hasSigningConfig ? signingConfigs.release : null
         }
     }
 
